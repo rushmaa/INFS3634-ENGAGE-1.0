@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="metadata"
+            type="com.dropbox.core.v2.files.Metadata" />
+
+        <variable
+            name="fragment"
+            type="infs3634.journalapp.DropboxFragment" />
+
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@{metadata.getName()}"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> fragment.downloadFile(metadata)}"
+                android:src="@android:drawable/ic_menu_save" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> fragment.deleteFile(metadata)}"
+                android:src="@android:drawable/ic_menu_delete"
+                android:visibility="@{fragment.isUserAdmin() ? View.VISIBLE : View.GONE}" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>
